@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+<!--    解决请求地址错误 或请求地址不存在的方式 加上绝对路径-->
+    <link rel="stylesheet" href="/admin/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/admin/css/base.css">
+    <script src="/jq/jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <div class="login-body">
+        <div class="login-container">
+            <h4 class="title">博客管理员登录</h4>
+            <div class="login">
+                <form action="login" method="post" id="LoginForm">
+                    <div class="form-group">
+                        <label>邮件</label>
+                        <input type="email" class="form-control" placeholder="请输入邮件地址" name="email" autocomplete="on">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" class="form-control" placeholder="请输入密码" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">登录</button>
+                </form>
+            </div>
+            <div class="tips"></div>
+        </div>
+    </div>
+    <script src="/admin/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/admin/lib/bootstrap/js/bootstrap.min.js"></script>
+<!--   表单提交序列化处理文件 -->
+    <script src="js/common.js"></script>
+    <script>
+        //为表单添加提交事件
+        $('#LoginForm').on('submit',function () {
+            //获取表单中用户输入的内容
+            let result = serializeToJson($(this));
+
+            //邮箱地址和用户名都未输入
+            if(result.email.trim().length === 0 && result.password.trim().length === 0) {
+                alert("请输入邮件地址和密码");
+                return false;
+            }
+
+            if(result.email.trim().length === 0) {
+                alert("请输入邮件地址");
+                //阻止程序向下执行
+                //不用return 的原因是阻止这个程序执行不是终止程序
+                return false;
+            }
+            //如果用户密码为空阻止程序
+            if(result.password.trim().length === 0) {
+                alert("请输入密码");
+                return  false;
+            }
+
+
+           //阻止表单默认提交
+           // return false;
+        });
+    </script>
+</body>
+
+</html>
